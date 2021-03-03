@@ -1,0 +1,100 @@
+body {
+    background-color: rgb(226, 226, 226);
+}
+
+// todo list global style
+.bg-mixin {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.todo__box {
+    max-width: 500px;
+    background-color: #fff;
+
+    input,
+    button,
+    div {
+        margin: 0;
+        padding: 0;
+    }
+
+    button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+    }
+}
+
+// input component style
+.input__box {
+    width: 100%;
+    display: flex;
+
+    .check-all {
+        width: 40px;
+        background-image: url(../public/delete.svg);
+        .bg-mixin();
+    }
+
+    .input {
+        flex-grow: 1;
+        padding: 20px 5px;
+        outline: none;
+        border: none;
+    }
+}
+// list component style
+.list{
+    border: 1px solid #e2e2e2;
+}
+
+// item component style
+.item {
+    display: flex;
+    align-items: center;
+    padding: 15px 4px !important;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 20px;
+    
+    &:hover>.item-delete{
+        opacity: 0.5;
+    }
+
+    .checkbox{
+        background-color: rgb(231, 231, 231);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+        .bg-mixin();
+    }
+    .item-delete{
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        .bg-mixin();
+        background-image: url(../public/arrow.svg);
+        opacity: 0;
+        transition: .2s;
+
+        &:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.setting {
+    display: flex;
+
+    .setting-button {
+        cursor: pointer;
+    }
+}
