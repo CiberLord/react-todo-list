@@ -12,7 +12,8 @@ class ToDo extends React.Component {
             todoList: [],
             counter:0,
             actived: 0,
-            showStatus: 0 //0 - показать все, 1- показать только активные, 2 - показать только не активные
+            showStatus: 0, //0 - показать все, 1- показать только активные, 2 - показать только не активные
+            checked:false
         }
 
         this.addItem = this.addItem.bind(this);
@@ -67,12 +68,21 @@ class ToDo extends React.Component {
     }
     checkAll(){
         let newlist=this.state.todoList.slice();
-        newlist.forEach(item => {
-            item.ischeck=true;
-        });
+        let acive=this.state.actived;
+        if(!this.state.checked){
+            newlist.forEach(item => {
+                item.ischeck=true;
+            });
+            acive=0;
+        }else{
+            newlist.forEach(item => {
+                item.ischeck=false;
+            });
+        }
         this.setState({
             todoList:newlist,
-            actived: 0,
+            actived: acive,
+            checked: !this.state.checked
         })
     }
     showAll(){
@@ -112,7 +122,7 @@ class ToDo extends React.Component {
         };
         return (
             <div className="todo__box">
-                <Input checkAll={this.checkAll} action={input} />
+                <Input checkAll={this.checkAll} action={input} checked={this.state.checked}/>
                 <List items={this.state.todoList} delete={this.deleteItem} oncheck={this.oncheck} status={this.state.showStatus}/>
                 {
                     (this.state.todoList.length>0)?
@@ -121,6 +131,7 @@ class ToDo extends React.Component {
                             showCompleted={this.showCompleted}
                             showActive={this.showActive}
                             clearCompleted={this.clearCompleted}
+                            status={this.state.showStatus}
                         />:""
                 }
             </div>

@@ -22,7 +22,7 @@ class Input extends React.Component {
     render() {
         return (
             <div className="input__box">
-                <button onClick={this.props.checkAll} className="check-all"></button>
+                <button onClick={this.props.checkAll} className={"check-all "+((this.props.checked)?"check-all-actived":"")}></button>
                 <input className="input" ref={this.input} onKeyUp={this.onEnter} type="text" placeholder="что нужно сделать?" />
             </div>
         )

@@ -31,7 +31,7 @@ class Item extends React.Component {
         return (visible&&
             <div className="item">
                 <button onClick={this.check} className="checkbox" style={((this.props.isCheck)?{backgroundImage:'url(../public/checked.svg)'}:{backgroundImage: 'none'})}></button>
-                <div className="item__text">{this.props.value}</div>
+                <p style={((this.props.isCheck)?{opacity:"0.5"}:{opacity:"1"})}  className="item__text">{this.props.value}</p>
                 <button onClick={this.delete} className="item-delete"></button>
             </div>)
     }
