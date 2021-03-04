@@ -1,5 +1,5 @@
 # react-todo-list
-
+Приложение собрано c использованием webpack
 Запуск приложение на локальном компьютере через консоль:
 
 # git clone https://github.com/CiberLord/react-todo-list.git

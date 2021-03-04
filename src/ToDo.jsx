@@ -2,6 +2,7 @@ import React from 'react';
 import Input from './Input.jsx';
 import List from './List.jsx';
 import Setting from './Setting.jsx';
+import './css/todo.less';
 
 
 class ToDo extends React.Component {
@@ -10,104 +11,106 @@ class ToDo extends React.Component {
 
         this.state = {
             todoList: [],
-            counter:0,
+            counter: 0,
             actived: 0,
             showStatus: 0, //0 - показать все, 1- показать только активные, 2 - показать только не активные
-            checked:false
+            checked: false
         }
 
         this.addItem = this.addItem.bind(this);
         this.selectAll = this.selectAll.bind(this);
-        this.deleteItem=this.deleteItem.bind(this);
-        this.oncheck=this.oncheck.bind(this);
-        this.checkAll=this.checkAll.bind(this);
-        this.showAll=this.showAll.bind(this);
-        this.showActive=this.showActive.bind(this);
-        this.showCompleted=this.showCompleted.bind(this);
-        this.clearCompleted=this.clearCompleted.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.oncheck = this.oncheck.bind(this);
+        this.checkAll = this.checkAll.bind(this);
+        this.showAll = this.showAll.bind(this);
+        this.showActive = this.showActive.bind(this);
+        this.showCompleted = this.showCompleted.bind(this);
+        this.clearCompleted = this.clearCompleted.bind(this);
     }
 
     selectAll() {
         console.log("while nothing");
     }
     addItem(value) {
-        let newlist=this.state.todoList.slice();
+        let newlist = this.state.todoList.slice();
         newlist.push({
             value: value,
-            ischeck:false
+            ischeck: false
         });
         this.setState({
             todoList: newlist,
-            counter:this.state.counter+1,
-            actived: this.state.actived+1
+            counter: this.state.counter + 1,
+            actived: this.state.actived + 1
         });
     }
-    deleteItem(index){
-        let newlist=this.state.todoList.slice();
-        newlist.splice(index,1);
+    deleteItem(index) {
+        let newlist = this.state.todoList.slice();
+        newlist.splice(index, 1);
         this.setState({
-            todoList:newlist,
-            counter:this.state.counter-1,
-            actived: this.state.actived-1
+            todoList: newlist,
+            counter: this.state.counter - 1,
+            actived: this.state.actived - 1
         })
     }
-    oncheck(index){
-        let newlist=this.state.todoList.slice();
-        let active=this.state.actived;
-        if(!newlist[index].ischeck){
-            newlist[index].ischeck=true;
+    oncheck(index) {
+        let newlist = this.state.todoList.slice();
+        let active = this.state.actived;
+        if (!newlist[index].ischeck) {
+            newlist[index].ischeck = true;
             active--;
-        }else{
-            newlist[index].ischeck=false;
+        } else {
+            newlist[index].ischeck = false;
             active++;
         }
         this.setState({
-            todoList:newlist,
+            todoList: newlist,
             actived: active
         })
     }
-    checkAll(){
-        let newlist=this.state.todoList.slice();
-        let acive=this.state.actived;
-        if(!this.state.checked){
-            newlist.forEach(item => {
-                item.ischeck=true;
-            });
-            acive=0;
-        }else{
-            newlist.forEach(item => {
-                item.ischeck=false;
-            });
+    checkAll() {
+        if (this.state.todoList.length > 0) {
+            let newlist = this.state.todoList.slice();
+            let acive = this.state.actived;
+            if (!this.state.checked) {
+                newlist.forEach(item => {
+                    item.ischeck = true;
+                });
+                acive = 0;
+            } else {
+                newlist.forEach(item => {
+                    item.ischeck = false;
+                });
+            }
+            this.setState({
+                todoList: newlist,
+                actived: acive,
+                checked: !this.state.checked
+            })
         }
-        this.setState({
-            todoList:newlist,
-            actived: acive,
-            checked: !this.state.checked
-        })
     }
-    showAll(){
+    showAll() {
         console.log("all");
         this.setState({
-            showStatus:0
+            showStatus: 0
         })
     }
-    showActive(){
+    showActive() {
         console.log("act");
         this.setState({
-            showStatus:1
+            showStatus: 1
         })
     }
-    showCompleted(){
+    showCompleted() {
         console.log("comp");
         this.setState({
-            showStatus:2
+            showStatus: 2
         })
     }
-    clearCompleted(){
-        let newlist=[]
-        for(let e of this.state.todoList){
-            if(!e.ischeck){
-                newlist.push({value:e.value,ischeck:false});
+    clearCompleted() {
+        let newlist = []
+        for (let e of this.state.todoList) {
+            if (!e.ischeck) {
+                newlist.push({ value: e.value, ischeck: false });
             }
         }
         this.setState({
@@ -122,17 +125,17 @@ class ToDo extends React.Component {
         };
         return (
             <div className="todo__box">
-                <Input checkAll={this.checkAll} action={input} checked={this.state.checked}/>
-                <List items={this.state.todoList} delete={this.deleteItem} oncheck={this.oncheck} status={this.state.showStatus}/>
+                <Input checkAll={this.checkAll} action={input} checked={this.state.checked} />
+                <List items={this.state.todoList} delete={this.deleteItem} oncheck={this.oncheck} status={this.state.showStatus} />
                 {
-                    (this.state.todoList.length>0)?
-                        <Setting actived={this.state.actived} 
+                    (this.state.todoList.length > 0) ?
+                        <Setting actived={this.state.actived}
                             showAll={this.showAll}
                             showCompleted={this.showCompleted}
                             showActive={this.showActive}
                             clearCompleted={this.clearCompleted}
                             status={this.state.showStatus}
-                        />:""
+                        /> : ""
                 }
             </div>
         )

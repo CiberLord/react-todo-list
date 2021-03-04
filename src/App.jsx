@@ -14,7 +14,7 @@ class App extends React.Component{
                 </h1>
                 <ToDo />
                 <div className="info">
-                    <p>нажми дважды чтобы редактировать</p>
+                    
                     <p>простой TODO список для демонстрации</p>
                 </div>
             </div>

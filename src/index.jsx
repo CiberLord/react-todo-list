@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './App.jsx';
-import "./style.less";
+import "./css/style.less";
 
 
 
