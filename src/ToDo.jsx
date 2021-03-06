@@ -10,13 +10,14 @@ class ToDo extends React.Component {
         super(props);
 
         this.state = {
-            todoList: [],
-            counter: 0,
-            actived: 0,
+            todoList: [], //список задач
+            counter: 0, //счетчик для подсчета колчества задач
+            actived: 0, //счетчик для подсчета не выполненных задач
             showStatus: 0, //0 - показать все, 1- показать только активные, 2 - показать только не активные
-            checked: false
+            checked: false //выбран или не выбран
         }
 
+        // биндинг всех функций
         this.addItem = this.addItem.bind(this);
         this.selectAll = this.selectAll.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -28,9 +29,8 @@ class ToDo extends React.Component {
         this.clearCompleted = this.clearCompleted.bind(this);
     }
 
-    selectAll() {
-        console.log("while nothing");
-    }
+    
+    // добавить новый элемент
     addItem(value) {
         let newlist = this.state.todoList.slice();
         newlist.push({
@@ -43,6 +43,7 @@ class ToDo extends React.Component {
             actived: this.state.actived + 1
         });
     }
+    //удалить задачу
     deleteItem(index) {
         let newlist = this.state.todoList.slice();
         newlist.splice(index, 1);
@@ -52,6 +53,7 @@ class ToDo extends React.Component {
             actived: this.state.actived - 1
         })
     }
+    //выбрать задачу
     oncheck(index) {
         let newlist = this.state.todoList.slice();
         let active = this.state.actived;
@@ -67,6 +69,7 @@ class ToDo extends React.Component {
             actived: active
         })
     }
+    // функция выбора всех
     checkAll() {
         if (this.state.todoList.length > 0) {
             let newlist = this.state.todoList.slice();
@@ -88,24 +91,28 @@ class ToDo extends React.Component {
             })
         }
     }
+    //показать всех
     showAll() {
         console.log("all");
         this.setState({
             showStatus: 0
         })
     }
+    //показать только не завершенные задачи
     showActive() {
         console.log("act");
         this.setState({
             showStatus: 1
         })
     }
+    //показать только выполненные задачи
     showCompleted() {
         console.log("comp");
         this.setState({
             showStatus: 2
         })
     }
+    //очистить от выполненных задач
     clearCompleted() {
         let newlist = []
         for (let e of this.state.todoList) {
